@@ -1,0 +1,48 @@
+
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local LocalPlayer = Players.LocalPlayer
+
+-- Esperar 5 segundos exactos
+task.wait(5)
+
+-- Crear la interfaz visual (GUI)
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "LaPalaCallScreen"
+ScreenGui.IgnoreGuiInset = true
+
+pcall(function()
+    ScreenGui.Parent = CoreGui
+end)
+if not ScreenGui.Parent then
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+end
+
+-- Cuadro de la imagen abarcando toda la pantalla
+local ImageFrame = Instance.new("ImageLabel")
+ImageFrame.Name = "PalaFull"
+ImageFrame.Parent = ScreenGui
+ImageFrame.Size = UDim2.new(1, 0, 1, 0)
+ImageFrame.Position = UDim2.new(0, 0, 0, 0)
+ImageFrame.BackgroundTransparency = 1
+ImageFrame.ScaleType = Enum.ScaleType.Stretch
+
+-- ID de la textura que me proporcionaste
+ImageFrame.Image = "rbxassetid://75313630081514"
+
+-- Botón para cerrar la llamada si deseas quitarla
+local CloseButton = Instance.new("TextButton")
+CloseButton.Parent = ImageFrame
+CloseButton.Size = UDim2.new(0, 60, 0, 60)
+CloseButton.Position = UDim2.new(1, -70, 0, 10)
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextScaled = true
+CloseButton.Font = Enum.Font.SourceSansBold
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+print("[Script] ¡Llamada de La Pala activada a pantalla completa con éxito!")
